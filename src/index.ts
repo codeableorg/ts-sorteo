@@ -17,24 +17,34 @@ try {
   console.log(error);
 }
 
-class NameManager {
+function createNameManager() {
 
-  private names: string[] = [];
+  const names: string[] = [];
 
-  addName(name: string): void {
+  return {
+    addName(name: string) {
+
       if (!name.trim()) {
-          throw new Error("El nombre no puede estar vacío");
+        throw new Error("Error en el nombre")
       }
-      this.names.push(name);
-      console.log(`Se agregó el nombre "${name}" a la lista`);
+      names.push(name);
+      console.log(`Nombre "${name}" agregado`)
+    },
+
+    getNames(): string[] {
+      return [...names];
+    }
   }
 }
 
-const nameManager = new NameManager();
+const nameManager = createNameManager();
 
 try {
   nameManager.addName("Sam");
+  nameManager.addName("Dan");
 }
 catch (error) {
   console.error(error);
 }
+
+console.log("Nombre almacenados", nameManager.getNames())
